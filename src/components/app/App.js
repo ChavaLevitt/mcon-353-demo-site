@@ -7,16 +7,22 @@ import { Header } from "../header/header";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+export const TodoContext = React.createContext();
+
 function App() {
+  const [todos, setTodos] = useState([]);
+
   return (
     <div>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/todo" element={<ToDo />} />
-        </Routes>
-      </BrowserRouter>
+      <TodoContext.Provider value={{ todos, setTodos }}>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/todo" element={<ToDo />} />
+          </Routes>
+        </BrowserRouter>
+      </TodoContext.Provider>
     </div>
   );
 }

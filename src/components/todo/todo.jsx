@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, Box, IconButton, Checkbox, TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { TodoContext } from "../app/App";
 
 function Todo(props) {
   return (
@@ -61,11 +62,12 @@ function TodoForm({ addTodo }) {
 }
 
 export const ToDo = () => {
-  const [todos, setTodos] = React.useState([]); 
+  const { todos, setTodos } = useContext(TodoContext);
 
   const addTodo = (text) => {
     const newTodos = [...todos, { text }];
-    setTodos(newTodos); 
+
+    setTodos(newTodos); //use the setter function from use contexxt instead of from useState
   };
 
   const completeTodo = (index) => {
