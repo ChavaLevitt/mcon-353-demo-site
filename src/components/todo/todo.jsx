@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid, Box, IconButton, Checkbox, TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { TodoContext } from "../app/App";
+import { TodoContext } from "../app/todocontext";
 
 function Todo(props) {
   return (
@@ -52,7 +52,8 @@ function TodoForm({ addTodo }) {
       <TextField
         fullWidth
         type="text"
-        label="enter a todo"
+        placeholder="enter a todo"
+        //label="enter a todo"
         className="input"
         value={listItemInput}
         onChange={(e) => setlistItemInput(e.target.value)}
@@ -67,7 +68,7 @@ export const ToDo = () => {
   const addTodo = (text) => {
     const newTodos = [...todos, { text }];
 
-    setTodos(newTodos); //use the setter function from use contexxt instead of from useState
+    setTodos(newTodos); 
   };
 
   const completeTodo = (index) => {
@@ -84,7 +85,7 @@ export const ToDo = () => {
   };
 
   return (
-    <div
+    <div data-test-id="todo"
       className="app"
       style={{ width: "30%", margin: "auto", padding: "20px" }}
     >
