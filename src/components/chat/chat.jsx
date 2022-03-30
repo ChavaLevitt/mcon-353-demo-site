@@ -1,12 +1,6 @@
 import React, { useState, useContext } from "react";
-import { Grid, Box, IconButton, Checkbox, TextField } from "@mui/material";
-
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { Box, TextField, InputLabel, MenuItem, FormControl, Select,Chip  } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-
 import { useInterval } from "../../hooks/use-interval";
 
 export const Chat = () => {
@@ -86,27 +80,30 @@ export const Chat = () => {
 function Message(props) {
   return (
     <div style={{ margin: "8px" }}>
-      <br />
-      <span
-        style={{
-          float: props.message.username == props.currUser ? "right" : "left",
-        }}
-      >
-        {props.message.username}:
-        <br />
-      </span>
-      <br />
-      <span
-        style={{
-          backgroundColor: "#D3D3D3",
-          padding: "3px",
-          borderRadius: "5%",
-          float: props.message.username == props.currUser ? "right" : "left",
-        }}
-      >
-        {props.message.text}
-        <br />
-      </span>
+      <table style={{ width: "100%" }}>
+        <tr>
+          <span
+            style={{
+              color: "white",
+              float:
+                props.message.username == props.currUser ? "right" : "left",
+            }}
+          >
+            {props.message.username}:
+          </span>
+        </tr>
+        <tr>
+          <Chip
+            label={props.message.text}
+            style={{
+              backgroundColor: "#D3D3D3",
+              padding: "3px",
+              float:
+                props.message.username == props.currUser ? "right" : "left",
+            }}
+          />
+        </tr>
+      </table>
     </div>
   );
 }
@@ -170,22 +167,28 @@ function ChatList(props) {
       </Box>
       <Box sx={{ minWidth: 120 }}>
         <form>
-          <TextField
-            id="standard-basic"
-            label="add a chat"
-            variant="standard"
-            type="text"
-            className="input"
-            value={newChat}
-            onChange={(e) => setNewChat(e.target.value)}
-          />
-          <IconButton
-            color="secondary"
-            aria-label="add chat"
-            onClick={() => addChat(newChat)}
-          >
-            <AddCircleIcon />
-          </IconButton>
+          <table>
+            <tr>
+              <td>
+                <TextField
+                  style={{ width: "150px" }}
+                  id="standard-basic"
+                  label="add a chat"
+                  variant="standard"
+                  type="text"
+                  className="input"
+                  value={newChat}
+                  onChange={(e) => setNewChat(e.target.value)}
+                />
+              </td>
+              <td>
+                <AddCircleIcon
+                  aria-label="add chat"
+                  onClick={() => addChat(newChat)}
+                />
+              </td>
+            </tr>
+          </table>
         </form>
       </Box>
     </div>
@@ -206,6 +209,7 @@ function UserList(props) {
       <Box sx={{ minWidth: 120 }}>
         <form onSubmit={handleSubmit}>
           <TextField
+            style={{ width: "150px" }}
             id="standard-basic"
             label="User"
             variant="standard"
@@ -239,13 +243,18 @@ function ChatRoom(props) {
 
   return (
     <div>
-      <div style={{marginLeft:"60px", fontSize:"30px"}}>{props.currChat.name}</div>
+      <div style={{ marginLeft: "60px", fontSize: "30px" }}>
+        {props.currChat.name}
+      </div>
       <div
         style={{
-          border: "5px solid #1d6063",
-          minHeight: "10px",
+          background: "#1d6063",
+          minHeight: "400px",
+          maxHeight: "400px",
           margin: "50px",
-          marginTop: "5px",
+          marginTop: "20px",
+          marginBotton: "0px",
+          overflowY: "auto",
         }}
       >
         {console.log(props.messages)}
@@ -274,7 +283,10 @@ function NewText({ sendMessage }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ width: "90%", margin: "auto" }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ width: "90%", margin: "auto", marginTop: "0px" }}
+    >
       <TextField
         fullWidth
         type="text"
