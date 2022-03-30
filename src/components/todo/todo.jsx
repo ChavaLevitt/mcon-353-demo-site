@@ -53,7 +53,6 @@ function TodoForm({ addTodo }) {
         fullWidth
         type="text"
         placeholder="enter a todo"
-        //label="enter a todo"
         className="input"
         value={listItemInput}
         onChange={(e) => setlistItemInput(e.target.value)}
@@ -68,7 +67,7 @@ export const ToDo = () => {
   const addTodo = (text) => {
     const newTodos = [...todos, { text }];
 
-    setTodos(newTodos); 
+    setTodos(newTodos);
   };
 
   const completeTodo = (index) => {
@@ -85,7 +84,8 @@ export const ToDo = () => {
   };
 
   return (
-    <div data-test-id="todo"
+    <div
+      data-test-id="todo"
       className="app"
       style={{ width: "30%", margin: "auto", padding: "20px" }}
     >

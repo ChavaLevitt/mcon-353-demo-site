@@ -1,5 +1,13 @@
 import React, { useState, useContext } from "react";
-import { Box, TextField, InputLabel, MenuItem, FormControl, Select,Chip  } from "@mui/material";
+import {
+  Box,
+  TextField,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Chip,
+} from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useInterval } from "../../hooks/use-interval";
 
@@ -44,8 +52,6 @@ export const Chat = () => {
               verticalAlign: "top",
             }}
           >
-            {/* <div style={{ width: "8%", padding: "20px", marginTop: "2px" }}> */}
-
             <ChatList
               handleChange={handleChange}
               chats={chats}
@@ -111,17 +117,13 @@ function Message(props) {
 function ChatList(props) {
   const [newChat, setNewChat] = useState("");
 
-  useInterval(
-    () => {
-      fetch("https://z36h06gqg7.execute-api.us-east-1.amazonaws.com/chats")
-        .then((response) => response.json())
-        .then((data) => {
-          props.setChats(data.Items);
-        });
-    },
-    1000 // fast polling
-    //60000 // slow polling
-  );
+  useInterval(() => {
+    fetch("https://z36h06gqg7.execute-api.us-east-1.amazonaws.com/chats")
+      .then((response) => response.json())
+      .then((data) => {
+        props.setChats(data.Items);
+      });
+  }, 1000);
 
   const addChat = () => {
     const chat = {
@@ -236,8 +238,7 @@ function ChatRoom(props) {
           props.setMessages(data.Items);
         });
     },
-    1000, // fast polling
-    //60000, // slow polling
+    1000,
     props.currChat.id
   );
 
